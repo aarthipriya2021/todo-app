@@ -31,14 +31,18 @@ const useStyles = makeStyles((theme) => ({
         margin:'0px 0px 0px 10px',
     },
     delete: {
-        margin:'-20px 0px 0px 80%',
+        margin:'-4.5% 35% 50px -15%',
+        
         
     },
     edit: {
-        marginLeft:'15%'
+        // marginLeft:'15%',
+        padding:'0px 0px 0px 0px',
+        margin:'-90px 30% 20px 15%',
+        backgroundColor:'white',
     },
     list: {
-        marginTop:'50px'
+        margin:'20px 0px 10px 20%'
     }
   }));
   const theme = createTheme({
@@ -89,7 +93,7 @@ function Todo(props) {
                         size="small"
                         className={classes.save}
                         startIcon={<SaveIcon />}
-                        onClick={updateTodo === "" ? "" : updateTodo}
+                        onClick={updateTodo }
                     >Save
                     </Button>
                     
@@ -120,6 +124,7 @@ function Todo(props) {
 }
 
 export default Todo;
+    
 //props.todo.todo
 //actually it seems like props.text text from app.js
 //props.todo => object
