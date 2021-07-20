@@ -1,4 +1,4 @@
-/* @import url('https://fonts.googleapis.com/css2?family=Crimson+Text&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Text&display=swap');
 
 .App {
   /* border:1px solid rgb(151, 151, 151); */
@@ -10,12 +10,12 @@
 ul{
   
   list-style-type: none;
-  border:1mm solid rgb(151, 151, 151);
-  text-align: center;
-  padding: 0px 0px 0px 0px;
-}
-li {
-  text-align: center;
+  /* border:1mm solid rgb(151, 151, 151); */
+  /* text-align: center; */
   
 }
+/* li {
+  text-align: center;
+  
+} */
 

@@ -56,18 +56,19 @@ function Todo(props) {
     const [open, setOpen] = useState(false)
     const [input, setInput] = useState()
 
-    const handleOpen = () => {
-        setOpen(true);
+    // const handleOpen = () => {
+    //     setOpen(true);
         
-    }
+    // }
 
   const updateTodo = () => {
       // update todo with new input
       db.collection('todos').doc(props.todo.id).set({
-        todo:input
+        todo:input 
       }, { merge: true})
 
       setOpen(false); 
+    //   console.log(input);
   }  
     return (
         <ThemeProvider theme={theme}>
@@ -80,7 +81,7 @@ function Todo(props) {
                     <form className={classes.root} noValidate autoComplete="off">
                         <TextField id="outlined-basic"  variant="outlined" value={input} placeholder={props.todo.todo} onChange={e => setInput(e.target.value)} />
                     </form>
-
+                   
                     {/* Updating data in todo list */}
                     <Button
                         variant="contained"
@@ -88,12 +89,12 @@ function Todo(props) {
                         size="small"
                         className={classes.save}
                         startIcon={<SaveIcon />}
-                        onClick={updateTodo}
+                        onClick={updateTodo === "" ? "" : updateTodo}
                     >Save
                     </Button>
                     
                 </div>
-
+                
                 </Modal>
                 <List className={classes.list}>
                     <ListItem style={{ }}>
@@ -115,6 +116,7 @@ function Todo(props) {
         </ThemeProvider>
         
     )
+    
 }
 
 export default Todo;
