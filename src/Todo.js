@@ -1,13 +1,16 @@
 import React, { useState} from 'react';
-import { Modal,List, ListItem, ListItemText, ListItemAvatar, Button} from '@material-ui/core';
+import { Modal,List, ListItem, ListItemText, Button} from '@material-ui/core';
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import { makeStyles, ThemeProvider } from '@material-ui/core/styles';
 import SaveIcon from '@material-ui/icons/Save';
 import { createTheme } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
+import EditIcon from '@material-ui/icons/Edit';
+import CancelIcon from '@material-ui/icons/Cancel';
 
 import { db} from './firebase';
 import './Todo.css';
+
 
 //from material-ui modal
 const useStyles = makeStyles((theme) => ({
@@ -23,36 +26,41 @@ const useStyles = makeStyles((theme) => ({
       margin:'80px 50px 50px 35%',
       width: 300,
       backgroundColor: theme.palette.background.paper,
+    //   backgroundColor:'black',
       border: '2px solid #000',
       boxShadow: theme.shadows[5],
       padding: theme.spacing(2, 4, 3),
+      
     },
     save: {
         margin:'0px 0px 0px 10px',
     },
     delete: {
-        margin:'-4.5% 35% 50px -15%',
-        
-        
+        padding:'0px 350px 0px 100px',
+
     },
     edit: {
-        // marginLeft:'15%',
-        padding:'0px 0px 0px 0px',
-        margin:'-90px 30% 20px 15%',
-        backgroundColor:'white',
+        marginLeft:'15%',
+        padding:'0px 40% 0px90px',
     },
     list: {
-        margin:'20px 0px 10px 20%'
+        marginTop:'50px',
+    },
+    text: {
+        padding:'0px 0px 0px 170px', 
+    },
+    cancel: {
+        margin:'0px 0px 0px 10px',
     }
   }));
   const theme = createTheme({
     typography: {
         "fontFamily": 'Playfair Display',
         "fontSize": 20,
-        
+
     }
-  });
-  
+});
+
 
 function Todo(props) {
 
@@ -60,32 +68,38 @@ function Todo(props) {
     const [open, setOpen] = useState(false)
     const [input, setInput] = useState()
 
-    // const handleOpen = () => {
-    //     setOpen(true);
-        
-    // }
+    const handleOpen = () => {
+        setOpen(true);
 
-  const updateTodo = () => {
+    }
+
+    const updateTodo = () => {
       // update todo with new input
       db.collection('todos').doc(props.todo.id).set({
-        todo:input 
+        todo:input
       }, { merge: true})
 
       setOpen(false); 
-    //   console.log(input);
-  }  
+    }
+    const cancelTodo = () => {
+        // update todo with new input
+        setInput(" ")
+        setOpen(false)
+      }  
+
     return (
         <ThemeProvider theme={theme}>
             <Modal
                 open={open}
                 onClose={e => setOpen(false)}
+                
             >   
                 <div className={classes.paper}>
                     <h3>Please update here :</h3>
                     <form className={classes.root} noValidate autoComplete="off">
                         <TextField id="outlined-basic"  variant="outlined" value={input} placeholder={props.todo.todo} onChange={e => setInput(e.target.value)} />
                     </form>
-                   
+
                     {/* Updating data in todo list */}
                     <Button
                         variant="contained"
@@ -93,34 +107,32 @@ function Todo(props) {
                         size="small"
                         className={classes.save}
                         startIcon={<SaveIcon />}
-                        onClick={updateTodo }
+                        onClick={updateTodo}
                     >Save
                     </Button>
-                    
+                    <Button
+                        variant="contained"
+                        color="primary"
+                        size="small"
+                        className={classes.cancel}
+                        startIcon={<CancelIcon />}
+                        onClick={cancelTodo}
+                    >Cancel
+                    </Button>
+
                 </div>
-                
+
                 </Modal>
                 <List className={classes.list}>
-                    <ListItem style={{ }}>
-                    <ListItemAvatar>
-                    </ListItemAvatar>
-                        <ListItemText primary={props.todo.todo}  />
-                        
+                    <ListItem>
+                        <ListItemText className={classes.text} primary={props.todo.todo}  />
+                        <EditIcon  className={classes.edit} onClick={e => setOpen(true)} />
+                        <DeleteForeverIcon className={classes.delete}  onClick={event => db.collection('todos').doc(props.todo.id).delete()} />
                     </ListItem>
-                    
-                    {/* Edit */}
-                    <Button className={classes.edit} variant="outlined" color="secondary" onClick={e => setOpen(true)}>
-                        Edit
-                    </Button>
-                    
-                    {/* deleting the todo */}
-                    <DeleteForeverIcon className={classes.delete}  onClick={event => db.collection('todos').doc(props.todo.id).delete()} />
-                    
                 </List>
         </ThemeProvider>
-        
+
     )
-    
 }
 
 export default Todo;

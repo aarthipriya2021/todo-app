@@ -1,8 +1,9 @@
 import React, { useState, useEffect} from 'react';
-import { Button, FormControl,InputLabel, Input } from '@material-ui/core';
+import { Button, FormControl,TextField } from '@material-ui/core';
 import Todo from './Todo';
 import { db } from './firebase';
 import firebase from 'firebase';
+import { makeStyles, ThemeProvider } from '@material-ui/core/styles';
 import './App.css';
 
 
@@ -39,11 +40,10 @@ function App() {
       <div className="App">
         <h1>On Time, On Task</h1>
         <form> 
-          <FormControl>
-            <InputLabel >✍️Write a todo</InputLabel>
-            <Input value={input} onChange={(e)=>setInput(e.target.value)} />
+          <FormControl >
+            <TextField label="✍️Write a todo" value={input} onChange={(e)=>setInput(e.target.value)} />
           </FormControl>
-            <Button variant="contained" color="primary" disabled={!input} type='submit' onClick={addTodo}>
+            <Button style={{backgroundColor:'rgb(240, 232, 232)', color:'black'}} variant="contained" color="primary" disabled={!input} type='submit' onClick={addTodo}>
               Add todo
             </Button> 
         </form>
