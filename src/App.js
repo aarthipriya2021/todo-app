@@ -3,7 +3,6 @@ import { Button, FormControl,TextField } from '@material-ui/core';
 import Todo from './Todo';
 import { db } from './firebase';
 import firebase from 'firebase';
-import { makeStyles, ThemeProvider } from '@material-ui/core/styles';
 import './App.css';
 
 
@@ -38,12 +37,12 @@ function App() {
   //console.log(input);
   return (
       <div className="App">
-        <h1>On Time, On Task</h1>
+        <h1>TODO APP</h1>
         <form> 
           <FormControl >
             <TextField label="✍️Write a todo" value={input} onChange={(e)=>setInput(e.target.value)} />
           </FormControl>
-            <Button style={{backgroundColor:'rgb(240, 232, 232)', color:'black'}} variant="contained" color="primary" disabled={!input} type='submit' onClick={addTodo}>
+            <Button style={{backgroundColor:'black', color:'white'}} variant="contained" color="primary" disabled={!input} type='submit' onClick={addTodo}>
               Add todo
             </Button> 
         </form>

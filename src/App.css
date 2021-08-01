@@ -1,12 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Crimson+Text&display=swap');
 
 .App {
-  /* border:1px solid rgb(151, 151, 151); */
-  /* color:rgb(240, 232, 232); */
+  
   color:rgb(17, 11, 11);
   padding-top: 30px;
-  /* background-color: rgb(0, 0, 0); */
-  background-color: rgb(255, 255, 255);
+  background-color: rgb(216, 215, 215);
   text-align: center;
 }
 ul{

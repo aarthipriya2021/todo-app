@@ -26,17 +26,20 @@ const useStyles = makeStyles((theme) => ({
       margin:'80px 50px 50px 35%',
       width: 300,
       backgroundColor: theme.palette.background.paper,
-    //   backgroundColor:'black',
       border: '2px solid #000',
       boxShadow: theme.shadows[5],
       padding: theme.spacing(2, 4, 3),
       
     },
     save: {
-        margin:'0px 0px 0px 10px',
+        margin:'0px 10px 10px 0px',
+        height:'40px',
+        width:'100px',
+
     },
-    delete: {
-        padding:'0px 350px 0px 100px',
+    cancel: {
+        margin:'-78px 0px 0px 190px',
+      
 
     },
     edit: {
@@ -49,8 +52,9 @@ const useStyles = makeStyles((theme) => ({
     text: {
         padding:'0px 0px 0px 170px', 
     },
-    cancel: {
-        margin:'0px 0px 0px 10px',
+    delete: {
+        padding:'0px 350px 0px 100px'
+        
     }
   }));
   const theme = createTheme({
@@ -68,10 +72,10 @@ function Todo(props) {
     const [open, setOpen] = useState(false)
     const [input, setInput] = useState()
 
-    const handleOpen = () => {
-        setOpen(true);
+    // const handleOpen = () => {
+    //     setOpen(true);
 
-    }
+    // }
 
     const updateTodo = () => {
       // update todo with new input
@@ -97,11 +101,9 @@ function Todo(props) {
                 <div className={classes.paper}>
                     <h3>Please update here :</h3>
                     <form className={classes.root} noValidate autoComplete="off">
-                        <TextField id="outlined-basic"  variant="outlined" value={input} placeholder={props.todo.todo} onChange={e => setInput(e.target.value)} />
-                    </form>
-
-                    {/* Updating data in todo list */}
-                    <Button
+                        <TextField id="outlined-basic"  variant="outlined" value={input} placeholder={props.todo.todo}  onChange={e => setInput(e.target.value)} />
+                        <Button
+                        type='submit'
                         variant="contained"
                         color="primary"
                         size="small"
@@ -110,6 +112,10 @@ function Todo(props) {
                         onClick={updateTodo}
                     >Save
                     </Button>
+                    </form>
+
+                    {/* Updating data in todo list */}
+                    
                     <Button
                         variant="contained"
                         color="primary"
